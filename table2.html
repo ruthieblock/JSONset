@@ -1,0 +1,94 @@
+<body>
+<h1>Julia Michaels SetList</h1>
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<h3> Select a Genre </h3>
+<select name="MusicGenre" onchange="change(this);">
+  <option selected="selected">Select a Music Genre</option>
+  <option value="Pop">Pop</option>
+  <option value="Electric Ballad">Electric Ballad</option>
+  <option value="Country">Country</option>
+  <option value="Lovesong">Lovesong</option>
+</select>
+
+<div id="output" name="output"></div>
+<div id="sortput" name="sortput"></div>
+
+<script>
+
+//print initial, full set list
+ function printOGList(results){
+	results = JSON.parse(results);
+		for($i in results.songlist){    
+        output.innerHTML=output.innerHTML+'<b>Name: </b>'+results.songlist[$i].name+'<br>';
+        output.innerHTML=output.innerHTML+'<br><b>Genre:</b> '+results.songlist[$i].genre+'<br>';              
+        output.innerHTML=output.innerHTML+'<br><b>Year:</b> '+results.songlist[$i].year+'<br>';
+        output.innerHTML=output.innerHTML+'<br><b>Artist:</b> '+results.songlist[$i].artist+'<br><br><br>';
+    }  
+ }
+
+//print list after sort
+ function printNUList(results){
+	results = JSON.parse(results);
+		for($i in results.songlist){    
+        sortput.innerHTML=sortput.innerHTML+'<b>Name: </b>'+results.songlist[$i].name+'<br>';
+        sortput.innerHTML=sortput.innerHTML+'<br><b>Genre:</b> '+results.songlist[$i].genre+'<br>';              
+        sortput.innerHTML=sortput.innerHTML+'<br><b>Year:</b> '+results.songlist[$i].year+'<br>';
+        sortput.innerHTML=sortput.innerHTML+'<br><b>Artist:</b> '+results.songlist[$i].artist+'<br><br><br>';
+    }  
+ }
+
+//clear inital setlist
+ function clearPage()
+ {
+	 document.getElementById("output").innerHTML = "";
+ }
+
+//clear subsequent sorts
+function clearNUPage()
+{
+	document.getElementById("sortput").innerHTML = "";
+}
+
+ results = '{ "songlist":[{ "genre": "Pop", "name": "Pink" , "year" : "2017", "artist": "Julia Michaels"},{ "genre": "Pop", "name": "I Miss You" , "year" : "2017", "artist": "Julia Michaels"},{ "genre": "Electric Ballad", "name": "Priest" , "year" : "2015", "artist": "Julia Michaels Ft. Clean Bandit"},{ "genre": "Alternative/Indie", "name": "Make It Up To You" , "year" : "2017", "artist": "Julia Michaels"}, { "genre": "Lovesong", "name": "Messed up, Kinda" , "year" : "2019", "artist": "Julia Michaels"}, { "genre": "Pop", "name": "What A Time" , "year" : "2019", "artist": "Julia Michaels ft. Rhys Lewis"}, { "genre": "Electric Ballad", "name": "Issues" , "year" : "2017", "artist": "Julia Michaels"}, { "genre": "Country", "name": "Worst in You" , "year" : "2017", "artist": "Julia Michaels"}, { "genre": "Pop", "name": "Anxiety" , "year" : "2016", "artist": "Julia Michaels"}, { "genre": "Country", "name": "Action" , "year" : "2017", "artist": "Julia Michaels"}] }';    
+
+ 	printOGList(results);
+ 
+	//filters w/ dropdown menu
+   window.change = function(e) {
+ 	if (e.value === 'Pop') 		
+	 	{    
+	 		results = '{ "songlist":[{ "genre": "Pop", "name": "Pink" , "year" : "2017", "artist": "Julia Michaels"},{ "genre": "Pop", "name": "I Miss You" , "year" : "2017", "artist": "Julia Michaels"}, { "genre": "Pop", "name": "What A Time" , "year" : "2019", "artist": "Julia Michaels ft. Rhys Lewis"},{ "genre": "Pop", "name": "Anxiety" , "year" : "2016", "artist": "Julia Michaels"}] }'; 	
+	 			clearPage();
+	 			clearNUPage();
+	 		  	printNUList(results);	
+	 	} 
+	 	else if (e.value === 'Electric Ballad') 
+	 	{
+	 		results = '{ "songlist":[{ "genre": "Electric Ballad", "name": "Priest" , "year" : "2015", "artist": "Julia Michaels Ft. Clean Bandit"}, { "genre": "Electric Ballad", "name": "Issues" , "year" : "2017", "artist": "Julia Michaels"}] }'; 
+	 			clearPage();
+	 			clearNUPage()
+	 		  	printNUList(results);	
+	    }
+	    else if (e.value === 'Country') 
+	    {
+	    	results = '{ "songlist":[{ "genre": "Country", "name": "Worst in You" , "year" : "2017", "artist": "Julia Michaels"}, { "genre": "Country", "name": "Action" , "year" : "2017", "artist": "Julia Michaels"}] }'; 
+	 			clearPage();
+	 			clearNUPage()
+	 		  	printNUList(results);	
+	  	}
+	  	 else if (e.value === 'Lovesong') 
+	    {
+	    	results = '{ "songlist":[{ "genre": "Lovesong", "name": "Messed up, Kinda" , "year" : "2019", "artist": "Julia Michaels"}] }';    
+	    		clearPage();
+	 			clearNUPage()
+	 		  	printNUList(results);	
+	  	}
+	}
+
+    
+</script>
+</body>
